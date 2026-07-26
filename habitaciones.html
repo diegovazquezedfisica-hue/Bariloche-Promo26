@@ -198,6 +198,10 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
     display:inline-block;margin-left:6px;font-size:11px;color:var(--brick);font-weight:700;
   }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#123240">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
 </head>
 <body>
 
@@ -367,6 +371,13 @@ function render(){
 document.getElementById('search').addEventListener('input', render);
 
 init();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
