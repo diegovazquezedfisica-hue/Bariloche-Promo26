@@ -188,6 +188,10 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
     text-transform:uppercase;letter-spacing:0.5px;font-family:'JetBrains Mono',monospace;font-size:12px;
   }
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#123240">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
 </head>
 <body>
 
@@ -204,5 +208,12 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
   <a class="dl-btn" href="contrato.pdf" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Descargar contrato</a>
 </div>
 
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
 </body>
 </html>
