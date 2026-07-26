@@ -226,7 +226,7 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
 <script>
 // ============ CONFIGURACIÓN COMPARTIDA ============
 const WORKER_URL = 'https://quiet-lake-5cf5.diegovazquez-ed-fisica.workers.dev';
-const TOKEN = 'DRL194749';
+const TOKEN = 'BARI26UAROXYYSTE';
 const ADMIN_PASSWORD = 'MiaBenito';
 
 async function fetchAlumnos(){
@@ -240,7 +240,7 @@ async function saveAlumno(row, updates){
   const resp = await fetch(WORKER_URL, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ token: TOKEN, row: Number(row), updates })
+    body: JSON.stringify({ token: TOKEN, password: ADMIN_PASSWORD, row: Number(row), updates })
   });
   return resp.json();
 }
