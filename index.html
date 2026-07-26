@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Bariloche 2026 — Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2430;
+    --navy-light:#26313F;
+    --paper:#F7F5EF;
+    --paper-dim:#EDEAE1;
+    --ink:#22262B;
+    --ink-soft:#5B6169;
+    --teal:#3E7C8C;
+    --teal-deep:#2C5B68;
+    --coral:#D9503C;
+    --coral-bg:#FBE7E2;
+    --gold:#C9A24B;
+    --line:#D8D3C6;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--navy);color:var(--paper);min-height:100vh;}
+
+  header{
+    padding:28px 20px 20px;
+    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-light) 100%);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px;
+  }
+  h1{font-family:'Fraunces',serif;font-size:26px;margin:0 0 4px;line-height:1.15;}
+  .subtitle{color:#A9B2BC;font-size:13px;}
+
+  .controls{
+    padding:14px 20px;background:var(--navy);
+    position:sticky;top:0;z-index:10;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .search-row{display:flex;gap:8px;margin-bottom:10px;}
+  input[type="text"], input[type="password"]{
+    font-family:'Inter',sans-serif;font-size:15px;padding:11px 14px;border-radius:8px;
+    border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);
+    color:var(--paper);width:100%;
+  }
+  input::placeholder{color:#7C8590;}
+  .chip-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
+  .chip{
+    flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 12px;
+    border-radius:999px;border:1px solid rgba(255,255,255,0.2);color:#C6CCD3;
+    background:transparent;cursor:pointer;white-space:nowrap;
+  }
+  .chip.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+
+  .mode-btn{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;padding:8px 12px;
+    border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:transparent;
+    color:#C6CCD3;cursor:pointer;white-space:nowrap;
+  }
+  .mode-btn.on{background:var(--coral);border-color:var(--coral);color:#fff;}
+
+  main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
+  .count{font-family:'JetBrains Mono',monospace;font-size:12px;color:#8891A0;margin-bottom:14px;}
+
+  .card{
+    background:var(--paper);color:var(--ink);border-radius:14px;margin-bottom:16px;
+    overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  }
+  .card-top{padding:16px 18px 12px;}
+  .name-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;margin:0;}
+  .orientacion{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.5px;
+    text-transform:uppercase;color:var(--teal-deep);background:#E4EEF0;
+    padding:3px 8px;border-radius:6px;white-space:nowrap;
+  }
+  .parents{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-top:8px;}
+  .parents b{color:var(--ink);font-weight:600;}
+  .parents a{color:var(--teal-deep);text-decoration:none;}
+
+  .alert-box{
+    margin-top:10px;background:var(--coral-bg);border-left:3px solid var(--coral);
+    padding:8px 10px;border-radius:6px;font-size:13px;color:#8A2E1F;font-weight:600;
+  }
+  .alert-box div{margin-top:2px;}
+  .alert-box.none{background:transparent;border-left:3px solid var(--line);color:var(--ink-soft);font-weight:400;}
+
+  .perf{
+    position:relative;height:1px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);
+    margin:0 18px;
+  }
+
+  .card-bottom{display:grid;grid-template-columns:repeat(3,1fr);padding:12px 18px 16px;gap:10px;}
+  .stat label{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;
+  }
+  .stat .val{font-size:15px;font-weight:600;}
+  .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600;}
+  .badge.deposito{background:#DDEBE0;color:#2C6B3F;}
+  .badge.pulsera{background:#DCE7F0;color:#2C5B78;}
+  .badge.pendiente{background:#F2E0C9;color:#8A5A16;}
+
+  .obs{padding:0 18px 16px;font-size:13px;color:var(--ink-soft);font-style:italic;}
+
+  .edit-field{width:100%;margin-top:2px;}
+  .edit-field input, .edit-field select{
+    width:100%;font-size:14px;padding:6px 8px;border-radius:6px;border:1px solid var(--line);
+    background:#fff;color:var(--ink);font-family:'Inter',sans-serif;
+  }
+  .save-btn{
+    margin:0 18px 16px;padding:9px;width:calc(100% - 36px);background:var(--teal-deep);
+    color:#fff;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;
+  }
+  .save-btn:active{opacity:0.8;}
+
+  .empty{text-align:center;color:#8891A0;padding:40px 0;font-size:14px;}
+  .loading{text-align:center;color:#8891A0;padding:40px 0;font-size:14px;}
+
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:100;}
+  .login-box{background:var(--paper);color:var(--ink);border-radius:14px;padding:24px;width:85%;max-width:320px;}
+  .login-box h3{font-family:'Fraunces',serif;margin:0 0 12px;}
+  .login-box input{border:1px solid var(--line);background:#fff;color:var(--ink);margin-bottom:10px;}
+  .login-box button{width:100%;padding:10px;border-radius:8px;border:none;background:var(--teal-deep);color:#fff;font-weight:600;cursor:pointer;}
+  .cancel-link{display:block;text-align:center;margin-top:10px;color:var(--ink-soft);font-size:13px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Colegio Juan XXIII · Egresados</div>
+  <h1>Bariloche 2026</h1>
+  <div class="subtitle">Panel de acompañantes — contactos, salud y logística</div>
+</header>
+
+<div class="controls">
+  <div class="search-row">
+    <input type="text" id="search" placeholder="Buscar alumno...">
+    <button class="mode-btn" id="modeBtn">EDITAR</button>
+  </div>
+  <div class="chip-row" id="groupChips"></div>
+</div>
+
+<main>
+  <div class="count" id="count"></div>
+  <div id="list"><div class="loading">Cargando datos...</div></div>
+</main>
+
+<div class="overlay" id="loginOverlay" style="display:none;">
+  <div class="login-box">
+    <h3>Modo edición</h3>
+    <input type="password" id="pwInput" placeholder="Contraseña">
+    <button id="pwSubmit">Ingresar</button>
+    <a class="cancel-link" id="pwCancel">Cancelar</a>
+  </div>
+</div>
+
+<script>
+// ============ CONFIGURACIÓN ============
+const WORKER_URL = 'PEGA_ACA_LA_URL_DE_TU_CLOUDFLARE_WORKER';
+const TOKEN = 'DRL194749';
+const ADMIN_PASSWORD = 'MiaBenito'; // cambiá esto si querés otra clave
+
+let allData = [];
+let editMode = false;
+let activeGroupFilter = null;
+
+async function loadData(){
+  try{
+    const resp = await fetch(`${WORKER_URL}?token=${TOKEN}`);
+    const json = await resp.json();
+    if(json.error){
+      document.getElementById('list').innerHTML = `<div class="empty">Error: ${json.error}</div>`;
+      return;
+    }
+    allData = json.data || [];
+    buildGroupChips();
+    render();
+  }catch(err){
+    document.getElementById('list').innerHTML = `<div class="empty">No se pudo conectar. Revisá la URL del Worker.</div>`;
+  }
+}
+
+function buildGroupChips(){
+  const groups = [...new Set(allData.map(a => a.Grupo).filter(Boolean))].sort();
+  const wrap = document.getElementById('groupChips');
+  wrap.innerHTML = '<button class="chip active" data-group="">Todos</button>' +
+    groups.map(g => `<button class="chip" data-group="${g}">Grupo ${g}</button>`).join('');
+  wrap.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      wrap.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeGroupFilter = chip.dataset.group || null;
+      render();
+    });
+  });
+}
+
+function badgeClass(modalidad){
+  if(!modalidad) return 'pendiente';
+  const m = modalidad.toLowerCase();
+  if(m.includes('depósito') || m.includes('deposito')) return 'deposito';
+  if(m.includes('pulsera')) return 'pulsera';
+  return 'pendiente';
+}
+
+function render(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  let filtered = allData.filter(a => {
+    const matchesSearch = !q || (a.Nombre || '').toLowerCase().includes(q);
+    const matchesGroup = !activeGroupFilter || String(a.Grupo) === String(activeGroupFilter);
+    return matchesSearch && matchesGroup;
+  });
+
+  document.getElementById('count').textContent = `${filtered.length} de ${allData.length} alumnos`;
+
+  if(filtered.length === 0){
+    document.getElementById('list').innerHTML = '<div class="empty">Sin resultados.</div>';
+    return;
+  }
+
+  document.getElementById('list').innerHTML = filtered.map(a => cardHTML(a)).join('');
+
+  if(editMode){
+    document.querySelectorAll('.save-btn').forEach(btn => {
+      btn.addEventListener('click', () => saveCard(btn.dataset.row));
+    });
+  }
+}
+
+function alertBoxHTML(a){
+  const hasAllergy = a.Alergias && a.Alergias.trim().length > 0;
+  const hasMed = a.Medicamentos && a.Medicamentos.trim().length > 0;
+  if(!hasAllergy && !hasMed){
+    return `<div class="alert-box none">Sin alergias ni medicación registrada</div>`;
+  }
+  let lines = '';
+  if(hasAllergy) lines += `<div>⚠ Alergias: ${a.Alergias}</div>`;
+  if(hasMed) lines += `<div>💊 Medicación: ${a.Medicamentos}</div>`;
+  return `<div class="alert-box">${lines}</div>`;
+}
+
+function cardHTML(a){
+  const contactos = `
+    <b>Madre:</b> ${a.Madre || '—'} ${a.CelMadre ? `· <a href="tel:${a.CelMadre}">${a.CelMadre}</a>` : ''}<br>
+    <b>Padre:</b> ${a.Padre || '—'} ${a.CelPadre ? `· <a href="tel:${a.CelPadre}">${a.CelPadre}</a>` : ''}
+    ${a.Tutor ? `<br><b>Tutor/a:</b> ${a.Tutor} ${a.CelTutor ? `· <a href="tel:${a.CelTutor}">${a.CelTutor}</a>` : ''}` : ''}
+  `;
+
+  if(!editMode){
+    return `
+    <div class="card">
+      <div class="card-top">
+        <div class="name-row">
+          <p class="name">${a.Nombre || '(sin nombre)'}</p>
+          ${a.Orientacion ? `<span class="orientacion">${a.Orientacion}</span>` : ''}
+        </div>
+        <div class="parents">${contactos}</div>
+        ${alertBoxHTML(a)}
+      </div>
+      <div class="perf"></div>
+      <div class="card-bottom">
+        <div class="stat"><label>Modalidad</label><span class="badge ${badgeClass(a.Modalidad)}">${a.Modalidad || 'Pendiente'}</span></div>
+        <div class="stat"><label>Grupo</label><div class="val">${a.Grupo || '—'}</div></div>
+        <div class="stat"><label>Habitación</label><div class="val">${a.Habitacion || '—'}</div></div>
+      </div>
+      ${a.Observaciones ? `<div class="obs">${a.Observaciones}</div>` : ''}
+    </div>`;
+  }
+
+  // EDIT MODE — solo Grupo, Habitacion y Observaciones son editables
+  return `
+  <div class="card">
+    <div class="card-top">
+      <div class="name-row">
+        <p class="name">${a.Nombre || '(sin nombre)'}</p>
+        ${a.Orientacion ? `<span class="orientacion">${a.Orientacion}</span>` : ''}
+      </div>
+      <div class="parents">${contactos}</div>
+      ${alertBoxHTML(a)}
+    </div>
+    <div class="perf"></div>
+    <div class="card-bottom">
+      <div class="stat"><label>Modalidad</label><span class="badge ${badgeClass(a.Modalidad)}">${a.Modalidad || 'Pendiente'}</span></div>
+      <div class="stat"><label>Grupo</label>
+        <div class="edit-field"><input type="text" data-field="Grupo" value="${a.Grupo || ''}"></div>
+      </div>
+      <div class="stat"><label>Habitación</label>
+        <div class="edit-field"><input type="text" data-field="Habitacion" value="${a.Habitacion || ''}"></div>
+      </div>
+    </div>
+    <div class="obs">
+      <div class="edit-field"><input type="text" data-field="Observaciones" value="${a.Observaciones || ''}" placeholder="Observaciones..."></div>
+    </div>
+    <button class="save-btn" data-row="${a._row}">Guardar cambios</button>
+  </div>`;
+}
+
+async function saveCard(row){
+  const card = [...document.querySelectorAll('.save-btn')].find(b => b.dataset.row == row).closest('.card');
+  const updates = {};
+  card.querySelectorAll('[data-field]').forEach(f => {
+    updates[f.dataset.field] = f.value;
+  });
+
+  try{
+    const resp = await fetch(WORKER_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ token: TOKEN, row: Number(row), updates })
+    });
+    const json = await resp.json();
+    if(json.success){
+      const idx = allData.findIndex(a => a._row == row);
+      Object.assign(allData[idx], updates);
+      render();
+    }else{
+      alert('Error al guardar: ' + (json.error || 'desconocido'));
+    }
+  }catch(err){
+    alert('No se pudo guardar. Revisá la conexión.');
+  }
+}
+
+document.getElementById('modeBtn').addEventListener('click', () => {
+  if(editMode){
+    editMode = false;
+    document.getElementById('modeBtn').classList.remove('on');
+    render();
+  }else{
+    document.getElementById('loginOverlay').style.display = 'flex';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+});
+
+document.getElementById('pwSubmit').addEventListener('click', () => {
+  const val = document.getElementById('pwInput').value;
+  if(val === ADMIN_PASSWORD){
+    editMode = true;
+    document.getElementById('modeBtn').classList.add('on');
+    document.getElementById('loginOverlay').style.display = 'none';
+    render();
+  }else{
+    alert('Contraseña incorrecta');
+  }
+});
+
+document.getElementById('pwCancel').addEventListener('click', () => {
+  document.getElementById('loginOverlay').style.display = 'none';
+});
+
+document.getElementById('search').addEventListener('input', render);
+
+loadData();
+</script>
+</body>
+</html>
