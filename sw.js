@@ -3,11 +3,11 @@
 // Estrategia: network-first (siempre intenta traer la versión
 // más nueva; si no hay conexión, usa la última guardada en caché)
 // ============================================
-const CACHE_NAME = 'bariloche26-v1';
+const CACHE_NAME = 'bariloche26-v2';
 const APP_SHELL = [
   './',
   './index.html',
-  './alumnos.html',
+  './egresados.html',
   './deposito.html',
   './habitaciones.html',
   './contrato.html',
