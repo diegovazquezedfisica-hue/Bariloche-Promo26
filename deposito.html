@@ -187,6 +187,10 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
   .saldo-neg{color:var(--brick);}
   .saldo-ok{color:var(--pine);}
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#123240">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
 </head>
 <body>
 
@@ -411,6 +415,13 @@ setupEditLogin(
 document.getElementById('search').addEventListener('input', render);
 
 init();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
