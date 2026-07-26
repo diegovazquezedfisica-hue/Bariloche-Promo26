@@ -163,7 +163,7 @@
 
 <script>
 // ============ CONFIGURACIÓN ============
-const WORKER_URL = 'PEGA_ACA_LA_URL_DE_TU_CLOUDFLARE_WORKER';
+const WORKER_URL = 'https://quiet-lake-5cf5.diegovazquez-ed-fisica.workers.dev';
 const TOKEN = 'DRL194749';
 const ADMIN_PASSWORD = 'MiaBenito'; // cambiá esto si querés otra clave
 
@@ -206,7 +206,7 @@ function badgeClass(modalidad){
   if(!modalidad) return 'pendiente';
   const m = modalidad.toLowerCase();
   if(m.includes('depósito') || m.includes('deposito')) return 'deposito';
-  if(m.includes('pulsera')) return 'pulsera';
+  if(m.includes('pulsera') || m.includes('enlace')) return 'pulsera';
   return 'pendiente';
 }
 
