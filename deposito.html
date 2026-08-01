@@ -198,13 +198,13 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
   <a class="back-link" href="index.html">← Inicio</a>
   <div class="eyebrow">COLEGIO JUAN XXIII · EGRESADOS</div>
   <h1>Depósito</h1>
-  <div class="subtitle">Costo, pagado y saldo pendiente por alumno</div>
+  <div class="subtitle">Costo, pagado y saldo pendiente por egresado</div>
 </header>
 <div class="ridge dim"></div>
 
 <div class="controls">
   <div class="search-row">
-    <input type="text" id="search" placeholder="Buscar alumno...">
+    <input type="text" id="search" placeholder="Buscar egresado...">
     <button class="mode-btn" id="modeBtn">EDITAR</button>
   </div>
 </div>
@@ -323,7 +323,7 @@ function render(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   const filtered = allData.filter(a => !q || (a.Nombre || '').toLowerCase().includes(q));
 
-  document.getElementById('count').textContent = `${filtered.length} de ${allData.length} alumnos`;
+  document.getElementById('count').textContent = `${filtered.length} de ${allData.length} egresados`;
 
   if(filtered.length === 0){
     document.getElementById('list').innerHTML = '<div class="empty">Sin resultados.</div>';
