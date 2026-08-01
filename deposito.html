@@ -345,6 +345,22 @@ function cardHTML(a){
   const saldo = costo - pagado;
   const pct = costo > 0 ? Math.min(100, Math.round((pagado / costo) * 100)) : 0;
   const devuelto = Number(a.Devuelto) || 0;
+  const esPulsera = badgeClass(a.Modalidad) === 'pulsera';
+
+  const modalidadHTML = `<span class="badge ${badgeClass(a.Modalidad)}">${a.Modalidad || 'Pendiente'}</span>`;
+
+  if(esPulsera){
+    return `
+    <div class="card">
+      <div class="card-top">
+        <div class="name-row">
+          <p class="name">${a.Nombre || '(sin nombre)'}</p>
+          ${modalidadHTML}
+        </div>
+        <div class="obs" style="padding-left:0;margin-top:8px;">Tiene Pulsera All Access — no paga depósito, no se cuenta en los totales de recaudación.</div>
+      </div>
+    </div>`;
+  }
 
   const barHTML = costo > 0 ? `
     <div class="pay-bar-wrap">
@@ -362,7 +378,10 @@ function cardHTML(a){
     return `
     <div class="card">
       <div class="card-top">
-        <p class="name">${a.Nombre || '(sin nombre)'}</p>
+        <div class="name-row">
+          <p class="name">${a.Nombre || '(sin nombre)'}</p>
+          ${modalidadHTML}
+        </div>
       </div>
       <div class="pay-row">
         <div class="stat"><label>Costo total</label><div class="val">${costo ? money(costo) : '—'}</div></div>
@@ -378,7 +397,10 @@ function cardHTML(a){
   return `
   <div class="card">
     <div class="card-top">
-      <p class="name">${a.Nombre || '(sin nombre)'}</p>
+      <div class="name-row">
+        <p class="name">${a.Nombre || '(sin nombre)'}</p>
+        ${modalidadHTML}
+      </div>
     </div>
     <div class="pay-row">
       <div class="stat"><label>Costo total</label>
