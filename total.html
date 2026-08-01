@@ -309,10 +309,13 @@ async function init(){
 }
 
 function render(allData){
+  const pulsera = allData.filter(a => badgeClass(a.Modalidad) === 'pulsera');
+  const conDeposito = allData.filter(a => badgeClass(a.Modalidad) !== 'pulsera');
+
   let totalCosto = 0, totalPagado = 0, totalDevuelto = 0;
   let completos = 0, conSaldo = 0, sinDatos = 0, devueltos = 0;
 
-  allData.forEach(a => {
+  conDeposito.forEach(a => {
     const costo = Number(a.Costo_Total) || 0;
     const pagado = Number(a.Pagado) || 0;
     const devuelto = Number(a.Devuelto) || 0;
@@ -330,6 +333,8 @@ function render(allData){
   const totalSaldo = totalCosto - totalPagado;
 
   document.getElementById('content').innerHTML = `
+    <div class="count" style="margin-bottom:14px;">Calculado sobre ${conDeposito.length} alumnos con depósito (excluye ${pulsera.length} con Pulsera All Access)</div>
+
     <div class="total-grid">
       <div class="total-tile">
         <label>Total recaudado</label>
@@ -350,10 +355,16 @@ function render(allData){
     </div>
 
     <div class="breakdown">
-      <div class="breakdown-row"><span>Alumnos con pago completo</span><b>${completos}</b></div>
-      <div class="breakdown-row"><span>Alumnos con saldo pendiente</span><b>${conSaldo}</b></div>
-      <div class="breakdown-row"><span>Alumnos sin datos de pago cargados</span><b>${sinDatos}</b></div>
-      <div class="breakdown-row"><span>Devoluciones ya realizadas</span><b>${devueltos} de ${allData.length}</b></div>
+      <div class="breakdown-row"><span>Alumnos que pagan depósito</span><b>${conDeposito.length}</b></div>
+      <div class="breakdown-row"><span>— con pago completo</span><b>${completos}</b></div>
+      <div class="breakdown-row"><span>— con saldo pendiente</span><b>${conSaldo}</b></div>
+      <div class="breakdown-row"><span>— sin datos de pago cargados</span><b>${sinDatos}</b></div>
+      <div class="breakdown-row"><span>Devoluciones ya realizadas</span><b>${devueltos} de ${conDeposito.length}</b></div>
+    </div>
+
+    <div class="breakdown" style="margin-top:14px;border-left:4px solid var(--lake-light);">
+      <div class="breakdown-row"><span>Alumnos con Pulsera All Access</span><b>${pulsera.length}</b></div>
+      <div class="breakdown-row"><span style="font-style:italic;color:var(--ink-soft);">No pagan depósito, no entran en los montos de arriba</span></div>
     </div>
   `;
 }
