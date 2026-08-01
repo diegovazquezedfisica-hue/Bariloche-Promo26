@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>Alumnos — Bariloche 2026</title>
+<title>Egresados — Bariloche 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
 
@@ -196,7 +196,7 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
 
 <div class="controls">
   <div class="search-row">
-    <input type="text" id="search" placeholder="Buscar alumno...">
+    <input type="text" id="search" placeholder="Buscar egresado...">
     <button class="mode-btn" id="modeBtn">EDITAR</button>
   </div>
   <div class="chip-row" id="groupChips"></div>
@@ -337,7 +337,7 @@ function render(){
     return matchesSearch && matchesGroup;
   });
 
-  document.getElementById('count').textContent = `${filtered.length} de ${allData.length} alumnos`;
+  document.getElementById('count').textContent = `${filtered.length} de ${allData.length} egresados`;
 
   if(filtered.length === 0){
     document.getElementById('list').innerHTML = '<div class="empty">Sin resultados.</div>';
