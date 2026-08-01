@@ -202,7 +202,7 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
 
 <div class="controls">
   <div class="search-row">
-    <input type="text" id="search" placeholder="Buscar alumno...">
+    <input type="text" id="search" placeholder="Buscar egresado...">
   </div>
 </div>
 
@@ -315,7 +315,7 @@ function render(){
   const q = document.getElementById('search').value.trim().toLowerCase();
   const filtered = allData.filter(a => !q || (a.Nombre || '').toLowerCase().includes(q));
 
-  document.getElementById('count').textContent = `${filtered.length} alumno(s) con casos especiales cargados`;
+  document.getElementById('count').textContent = `${filtered.length} egresado(s) con casos especiales cargados`;
 
   if(filtered.length === 0){
     document.getElementById('list').innerHTML = '<div class="empty">No hay casos especiales registrados (o no coinciden con la búsqueda).</div>';
