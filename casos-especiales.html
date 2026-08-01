@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Casos Especiales — Bariloche 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --lake:#123240;      /* azul lago profundo - fondo principal */
+  --lake-light:#1B4456;
+  --pine:#2B4A38;       /* verde bosque - acentos secundarios */
+  --pine-light:#3D6650;
+  --snow:#F6F5F0;        /* blanco nieve - tarjetas */
+  --snow-dim:#EAE7DD;
+  --ink:#20261F;
+  --ink-soft:#5C6558;
+  --amber:#E2822E;       /* naranja atardecer - acento principal */
+  --amber-dark:#B8631B;
+  --bark:#8C6F52;         /* marrón madera - detalles/etiquetas */
+  --brick:#B23A2E;        /* alerta - alergias */
+  --brick-bg:#F5E2DE;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Work Sans',sans-serif;background:var(--lake);color:var(--snow);min-height:100vh;}
+
+/* ---------- CORDILLERA (motivo gráfico repetido) ---------- */
+.ridge{
+  height:16px;
+  background:
+    linear-gradient(135deg, transparent 50%, var(--amber) 50%) 0 0/18px 18px repeat-x,
+    linear-gradient(45deg, var(--amber) 50%, transparent 50%) 9px 0/18px 18px repeat-x;
+  opacity:0.9;
+}
+.ridge.dim{
+  background:
+    linear-gradient(135deg, transparent 50%, var(--pine-light) 50%) 0 0/14px 14px repeat-x,
+    linear-gradient(45deg, var(--pine-light) 50%, transparent 50%) 7px 0/14px 14px repeat-x;
+  height:10px;opacity:0.6;
+}
+
+/* ---------- HEADER ---------- */
+header{
+  padding:26px 20px 16px;
+  background:linear-gradient(180deg,var(--lake) 0%, var(--lake-light) 100%);
+}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--amber);margin-bottom:6px;
+}
+h1{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:32px;
+  margin:0 0 6px;line-height:1;letter-spacing:0.5px;text-transform:uppercase;
+}
+.subtitle{color:#B7C4C0;font-size:13px;font-family:'Work Sans',sans-serif;}
+.back-link{
+  display:inline-block;margin-bottom:10px;color:#9FB0AC;text-decoration:none;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.5px;
+}
+
+/* ---------- CONTROLS ---------- */
+.controls{
+  padding:14px 20px;background:var(--lake);position:sticky;top:0;z-index:10;
+}
+.search-row{display:flex;gap:8px;margin-bottom:10px;}
+input[type="text"], input[type="password"]{
+  font-family:'Work Sans',sans-serif;font-size:15px;padding:11px 14px;border-radius:6px;
+  border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);
+  color:var(--snow);width:100%;
+}
+input::placeholder{color:#7E9490;}
+.chip-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
+.chip{
+  flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 12px;
+  border-radius:4px;border:1px solid rgba(255,255,255,0.2);color:#C6D2CE;
+  background:transparent;cursor:pointer;white-space:nowrap;
+}
+.chip.active{background:var(--amber);border-color:var(--amber);color:#1B1400;font-weight:700;}
+.mode-btn{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;padding:8px 12px;
+  border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:transparent;
+  color:#C6D2CE;cursor:pointer;white-space:nowrap;
+}
+.mode-btn.on{background:var(--brick);border-color:var(--brick);color:#fff;}
+
+main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
+.count{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7E9490;margin-bottom:14px;}
+
+/* ---------- CARD ---------- */
+.card{
+  background:var(--snow);color:var(--ink);border-radius:10px;margin-bottom:16px;
+  overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.3);border:1px solid rgba(0,0,0,0.04);
+}
+.card-top{padding:16px 18px 12px;}
+.name-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.name{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:21px;margin:0;text-transform:uppercase;letter-spacing:0.3px;}
+.orientacion{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;
+  color:#fff;background:var(--pine);padding:3px 8px;border-radius:4px;white-space:nowrap;
+}
+.parents{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-top:8px;}
+.parents b{color:var(--ink);font-weight:600;}
+.parents a{color:var(--pine);text-decoration:none;font-weight:600;}
+
+.alert-box{
+  margin-top:10px;background:var(--brick-bg);border-left:3px solid var(--brick);
+  padding:8px 10px;border-radius:4px;font-size:13px;color:#7A251C;font-weight:600;
+}
+.alert-box div{margin-top:2px;}
+.alert-box.none{background:transparent;border-left:3px solid var(--snow-dim);color:var(--ink-soft);font-weight:400;}
+
+.perf{
+  position:relative;height:2px;margin:0 18px;
+  background:repeating-linear-gradient(90deg, var(--bark) 0 5px, transparent 5px 11px);
+  opacity:0.5;
+}
+
+.card-bottom{display:grid;grid-template-columns:repeat(3,1fr);padding:12px 18px 16px;gap:10px;}
+.stat label{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;
+}
+.stat .val{font-size:16px;font-weight:700;font-family:'Work Sans',sans-serif;}
+.badge{display:inline-block;padding:3px 9px;border-radius:4px;font-size:12px;font-weight:700;}
+.badge.deposito{background:#DCE8DD;color:var(--pine);}
+.badge.pulsera{background:#DCE6EA;color:var(--lake-light);}
+.badge.pendiente{background:#F5E1CC;color:var(--amber-dark);}
+
+.obs{padding:0 18px 16px;font-size:13px;color:var(--ink-soft);font-style:italic;}
+
+.edit-field{width:100%;margin-top:2px;}
+.edit-field input, .edit-field select{
+  width:100%;font-size:14px;padding:6px 8px;border-radius:5px;border:1px solid var(--snow-dim);
+  background:#fff;color:var(--ink);font-family:'Work Sans',sans-serif;
+}
+.save-btn{
+  margin:0 18px 16px;padding:10px;width:calc(100% - 36px);background:var(--amber);
+  color:#1B1400;border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;
+  text-transform:uppercase;letter-spacing:0.5px;font-family:'JetBrains Mono',monospace;
+}
+.save-btn:active{opacity:0.8;}
+
+.empty{text-align:center;color:#7E9490;padding:40px 0;font-size:14px;}
+.loading{text-align:center;color:#7E9490;padding:40px 0;font-size:14px;}
+
+/* ---------- LOGIN OVERLAY ---------- */
+.overlay{position:fixed;inset:0;background:rgba(6,16,20,0.7);display:flex;align-items:center;justify-content:center;z-index:100;}
+.login-box{background:var(--snow);color:var(--ink);border-radius:10px;padding:24px;width:85%;max-width:320px;border-top:4px solid var(--amber);}
+.login-box h3{font-family:'Big Shoulders Display',sans-serif;text-transform:uppercase;margin:0 0 12px;font-size:20px;}
+.login-box input{border:1px solid var(--snow-dim);background:#fff;color:var(--ink);margin-bottom:10px;}
+.login-box button{width:100%;padding:10px;border-radius:6px;border:none;background:var(--amber);color:#1B1400;font-weight:700;cursor:pointer;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.5px;}
+.cancel-link{display:block;text-align:center;margin-top:10px;color:var(--ink-soft);font-size:13px;}
+
+/* ---------- PORTADA / MENU ---------- */
+.cover{
+  text-align:center;padding:56px 20px 0;
+  background:linear-gradient(180deg,var(--lake) 0%, var(--lake-light) 100%);
+}
+.cover .eyebrow{justify-content:center;display:flex;}
+.cover h1{font-size:42px;line-height:0.95;margin-bottom:18px;}
+.date-badge{
+  display:inline-block;position:relative;margin-bottom:-14px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;letter-spacing:1px;background:var(--amber);color:#1B1400;font-weight:700;
+  padding:8px 18px;border-radius:4px;
+}
+
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:30px 20px 20px;max-width:520px;margin:0 auto;}
+.menu-tile{
+  background:var(--snow);color:var(--ink);border-radius:8px;padding:22px 14px;text-align:center;
+  text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.3);
+  border-left:4px solid var(--amber);position:relative;
+}
+.menu-tile:nth-child(2n){border-left-color:var(--pine);}
+.menu-tile .icon{font-size:26px;display:block;margin-bottom:8px;}
+.menu-tile .label{
+  font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:16px;
+  text-transform:uppercase;letter-spacing:0.5px;
+}
+
+</style>
+<style>
+  .special-card{background:var(--snow);color:var(--ink);border-radius:10px;margin-bottom:14px;padding:16px 18px;box-shadow:0 6px 18px rgba(0,0,0,0.3);border-left:4px solid var(--brick);}
+  .special-name{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;margin:0 0 8px;}
+  .special-row{font-size:13px;color:var(--ink-soft);margin-top:4px;}
+  .special-row b{color:var(--ink);}
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#123240">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+</head>
+<body>
+
+<header>
+  <a class="back-link" href="index.html">← Inicio</a>
+  <div class="eyebrow">COLEGIO JUAN XXIII · EGRESADOS</div>
+  <h1>Casos Especiales</h1>
+  <div class="subtitle">Alergias, medicación y observaciones a tener en cuenta</div>
+</header>
+<div class="ridge dim"></div>
+
+<div class="controls">
+  <div class="search-row">
+    <input type="text" id="search" placeholder="Buscar alumno...">
+  </div>
+</div>
+
+<main>
+  <div class="count" id="count"></div>
+  <div id="list"><div class="loading">Cargando datos...</div></div>
+</main>
+
+<script>
+// ============ CONFIGURACIÓN COMPARTIDA ============
+const WORKER_URL = 'https://quiet-lake-5cf5.diegovazquez-ed-fisica.workers.dev';
+const TOKEN = 'BARI26UAROXYYSTE';
+const ADMIN_PASSWORD = 'MiaBenito';
+
+async function fetchAlumnos(){
+  const resp = await fetch(`${WORKER_URL}?token=${TOKEN}`);
+  const json = await resp.json();
+  if(json.error) throw new Error(json.error);
+  return json.data || [];
+}
+
+async function saveAlumno(row, updates){
+  const resp = await fetch(WORKER_URL, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ token: TOKEN, password: ADMIN_PASSWORD, row: Number(row), updates })
+  });
+  return resp.json();
+}
+
+function badgeClass(modalidad){
+  if(!modalidad) return 'pendiente';
+  const m = modalidad.toLowerCase();
+  if(m.includes('depósito') || m.includes('deposito')) return 'deposito';
+  if(m.includes('pulsera') || m.includes('enlace')) return 'pulsera';
+  return 'pendiente';
+}
+
+function alertBoxHTML(a){
+  const hasAllergy = a.Alergias && a.Alergias.trim().length > 0;
+  const hasMed = a.Medicamentos && a.Medicamentos.trim().length > 0;
+  if(!hasAllergy && !hasMed){
+    return `<div class="alert-box none">Sin alergias ni medicación registrada</div>`;
+  }
+  let lines = '';
+  if(hasAllergy) lines += `<div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Alergias: ${a.Alergias}</div>`;
+  if(hasMed) lines += `<div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-45 12 12)"/><line x1="8.5" y1="15.5" x2="15.5" y2="8.5"/></svg>Medicación: ${a.Medicamentos}</div>`;
+  return `<div class="alert-box">${lines}</div>`;
+}
+
+function money(n){
+  const num = Number(n) || 0;
+  return '$' + num.toLocaleString('es-AR');
+}
+
+// Login de modo edición - reutilizable en cualquier página
+function setupEditLogin(onUnlock, onLock){
+  const modeBtn = document.getElementById('modeBtn');
+  const overlay = document.getElementById('loginOverlay');
+  const pwInput = document.getElementById('pwInput');
+  let editMode = false;
+
+  modeBtn.addEventListener('click', () => {
+    if(editMode){
+      editMode = false;
+      modeBtn.classList.remove('on');
+      onLock();
+    }else{
+      overlay.style.display = 'flex';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  });
+
+  document.getElementById('pwSubmit').addEventListener('click', () => {
+    if(pwInput.value === ADMIN_PASSWORD){
+      editMode = true;
+      modeBtn.classList.add('on');
+      overlay.style.display = 'none';
+      onUnlock();
+    }else{
+      alert('Contraseña incorrecta');
+    }
+  });
+
+  document.getElementById('pwCancel').addEventListener('click', () => {
+    overlay.style.display = 'none';
+  });
+}
+
+</script>
+<script>
+let allData = [];
+
+async function init(){
+  try{
+    const raw = await fetchAlumnos();
+    allData = raw.filter(a =>
+      (a.Alergias && a.Alergias.trim()) ||
+      (a.Medicamentos && a.Medicamentos.trim()) ||
+      (a.Observaciones && a.Observaciones.trim())
+    );
+    render();
+  }catch(err){
+    document.getElementById('list').innerHTML = `<div class="empty">No se pudo conectar: ${err.message}</div>`;
+  }
+}
+
+function render(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const filtered = allData.filter(a => !q || (a.Nombre || '').toLowerCase().includes(q));
+
+  document.getElementById('count').textContent = `${filtered.length} alumno(s) con casos especiales cargados`;
+
+  if(filtered.length === 0){
+    document.getElementById('list').innerHTML = '<div class="empty">No hay casos especiales registrados (o no coinciden con la búsqueda).</div>';
+    return;
+  }
+
+  document.getElementById('list').innerHTML = filtered.map(a => `
+    <div class="special-card">
+      <p class="special-name">${a.Nombre}</p>
+      ${a.Alergias && a.Alergias.trim() ? `<div class="special-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg><b>Alergias:</b> ${a.Alergias}</div>` : ''}
+      ${a.Medicamentos && a.Medicamentos.trim() ? `<div class="special-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-45 12 12)"/><line x1="8.5" y1="15.5" x2="15.5" y2="8.5"/></svg><b>Medicación:</b> ${a.Medicamentos}</div>` : ''}
+      ${a.Observaciones && a.Observaciones.trim() ? `<div class="special-row"><b>Observaciones:</b> ${a.Observaciones}</div>` : ''}
+      ${a.CelMadre ? `<div class="special-row"><b>Contacto:</b> <a href="tel:${a.CelMadre}" style="color:var(--pine)">${a.Madre || 'Madre'} · ${a.CelMadre}</a></div>` : ''}
+    </div>
+  `).join('');
+}
+
+document.getElementById('search').addEventListener('input', render);
+init();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
