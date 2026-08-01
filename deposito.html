@@ -344,10 +344,18 @@ function cardHTML(a){
   const pagado = Number(a.Pagado) || 0;
   const saldo = costo - pagado;
   const pct = costo > 0 ? Math.min(100, Math.round((pagado / costo) * 100)) : 0;
+  const devuelto = Number(a.Devuelto) || 0;
 
   const barHTML = costo > 0 ? `
     <div class="pay-bar-wrap">
       <div class="pay-bar"><div class="pay-bar-fill" style="width:${pct}%"></div></div>
+    </div>` : '';
+
+  const devolucionViewHTML = devuelto > 0 ? `
+    <div class="ridge dim"></div>
+    <div class="pay-row" style="grid-template-columns:1fr 1fr;">
+      <div class="stat"><label>Devuelto</label><div class="val saldo-ok">${money(devuelto)}</div></div>
+      <div class="stat"><label>Fecha devolución</label><div class="val">${a.Fecha_Devolucion || '—'}</div></div>
     </div>` : '';
 
   if(!editMode){
@@ -363,6 +371,7 @@ function cardHTML(a){
       </div>
       ${barHTML}
       ${a.Historial_Pagos ? `<div class="obs"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>${a.Historial_Pagos}</div>` : ''}
+      ${devolucionViewHTML}
     </div>`;
   }
 
@@ -383,6 +392,15 @@ function cardHTML(a){
     ${barHTML}
     <div class="obs">
       <div class="edit-field"><input type="text" data-field="Historial_Pagos" value="${a.Historial_Pagos || ''}" placeholder="Ej: 05/03 $50.000 · 10/04 $50.000"></div>
+    </div>
+    <div class="ridge dim"></div>
+    <div class="pay-row" style="grid-template-columns:1fr 1fr;">
+      <div class="stat"><label>Devolución (post-viaje)</label>
+        <div class="edit-field"><input type="number" data-field="Devuelto" value="${a.Devuelto || ''}" placeholder="Monto devuelto"></div>
+      </div>
+      <div class="stat"><label>Fecha devolución</label>
+        <div class="edit-field"><input type="text" data-field="Fecha_Devolucion" value="${a.Fecha_Devolucion || ''}" placeholder="Ej: 05/09/2026"></div>
+      </div>
     </div>
     <button class="save-btn" data-row="${a._row}">Guardar cambios</button>
   </div>`;
