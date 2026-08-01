@@ -215,7 +215,7 @@ main{padding:16px 20px 60px;max-width:720px;margin:0 auto;}
 
 <div class="controls">
   <div class="search-row">
-    <input type="text" id="search" placeholder="Buscar alumno o N° habitación...">
+    <input type="text" id="search" placeholder="Buscar egresado o N° habitación...">
   </div>
 </div>
 
@@ -339,7 +339,7 @@ function render(){
     return a.localeCompare(b, undefined, {numeric:true});
   });
 
-  document.getElementById('count').textContent = `${filtered.length} alumnos en ${roomKeys.length} habitaciones`;
+  document.getElementById('count').textContent = `${filtered.length} egresados en ${roomKeys.length} habitaciones`;
 
   if(roomKeys.length === 0){
     document.getElementById('list').innerHTML = '<div class="empty">Sin resultados.</div>';
